@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/employee")
 public class HwStreamApiAndOptionalController {
     private final EmployeeService employeeServiceimpl;
 
@@ -18,12 +17,12 @@ public class HwStreamApiAndOptionalController {
         this.employeeServiceimpl = employeeServiceImpl;
     }
 
-    @GetMapping
+    @GetMapping(path = "/employee")
     public Collection<Employee> employeeList() {
         return employeeServiceimpl.employeeList();
     }
 
-    @GetMapping(path = "/add")
+    @GetMapping(path = "/employee/add")
     public Employee addEmployee(@RequestParam(value = "firstName", required = false) String firstName,
                                 @RequestParam(value = "lastName", required = false) String lastName,
                                 @RequestParam(value = "department", required = false) int department,
@@ -39,7 +38,7 @@ public class HwStreamApiAndOptionalController {
     }
 
 
-    @GetMapping(path = "/remove")
+    @GetMapping(path = "/employee/remove")
     public Employee removeEmployee(@RequestParam(value = "firstName", required = false) String firstName,
                                    @RequestParam(value = "lastName", required = false) String lastName,
                                    @RequestParam(value = "department", required = false) int department,
@@ -53,7 +52,7 @@ public class HwStreamApiAndOptionalController {
         return employee;
     }
 
-    @GetMapping(path = "/find")
+    @GetMapping(path = "/employee/find")
     public Employee findEmployee(@RequestParam(value = "firstName", required = false) String firstName,
                                  @RequestParam(value = "lastName", required = false) String lastName,
                                  @RequestParam(value = "department", required = false) int department,

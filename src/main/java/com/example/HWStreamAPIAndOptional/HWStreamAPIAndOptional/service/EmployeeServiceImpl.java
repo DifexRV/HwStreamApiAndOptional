@@ -14,15 +14,27 @@ import java.util.Map;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    Map<String,Employee> employees = new HashMap<>(Map.of());
+    Map<String, Employee> employees = new HashMap<>(Map.of());
 
-    @Override
-    public Collection<Employee> employeeList() {
+    {
+        employees.put("Тролль", new Employee("Борис", "Тролль", 1, 23000));
+        employees.put("Кранова", new Employee("Матильда", "Кранова", 1, 13000));
+        employees.put("Врунишкин", new Employee("Аркадий", "Врунишкин", 2, 35000));
+        employees.put("Грустный", new Employee("Олег", "Грустный", 3, 11000));
+        employees.put("Бристоль", new Employee("Матеос", "Бристоль", 1, 20000));
+        employees.put("Медлеходов", new Employee("Бронислав", "Медлеходов", 2, 30000));
+        employees.put("Горгона", new Employee("Медуза", "Горгона", 3, 18000));
+        employees.put("Наглышов", new Employee("Глав", "Наглышов", 2, 37000));
+        employees.put("Простофилин", new Employee("Иван", "Простофилин", 3, 7000));
+    }
+
+        @Override
+        public Collection<Employee> employeeList () {
         return Collections.unmodifiableCollection(employees.values());
     }
 
-    @Override
-    public Employee addEmployee(Employee employee) throws Exception {
+        @Override
+        public Employee addEmployee (Employee employee) throws Exception {
         if (employees.size() >= 13) {
             throw new EmployeeStorageIsFullException();
         }
@@ -35,8 +47,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    @Override
-    public Employee removeEmployee(Employee employee) throws Exception {
+        @Override
+        public Employee removeEmployee (Employee employee) throws Exception {
 
         if (employees.containsKey(employee.getFullName()) == false) {
             throw new EmployeeNotFoundException();
@@ -46,8 +58,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     }
 
-    @Override
-    public Employee findEmployee(Employee employee) throws Exception {
+        @Override
+        public Employee findEmployee (Employee employee) throws Exception {
 
         if (employees.containsKey(employee.getFullName()) == false) {
             throw new EmployeeNotFoundException();
@@ -55,4 +67,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.get(employee.getFullName());
     }
 
-}
+    }
